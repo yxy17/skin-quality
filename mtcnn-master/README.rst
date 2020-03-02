@@ -1,12 +1,12 @@
-This  folder contains code and package for face detection and face feature localization modified from The https://github.com/ipazc/mtcnn
+This  folder contains code and package for face detection and face feature localization modified from https://github.com/ipazc/mtcnn
 
 For environment setting, please refer to the above link.
 
 We use this code to obtain the cropped face image.
 
-```
-python main.py --image_paths <original image directory> --save_paths <cropped imgs path>
-```
+.. code:: bash
+  $ python main.py --image_paths <original image directory> --save_paths <cropped imgs path>
+
 
 
 
