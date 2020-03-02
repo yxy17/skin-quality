@@ -21,8 +21,8 @@ def downloadPicByUrl(url,path):
 
     r = requests.request('get',url) # 
     #print(r.status_code)
-    with open(path,'wb') as f:  #鎵撳紑鍐欏叆鍒皃ath璺緞閲?浜岃繘鍒舵枃浠讹紝杩斿洖鐨勫彞鏌勫悕涓篺
-        f.write(r.content)  #寰€f閲屽啓鍏瀵硅薄鐨勪簩杩涘埗鏂囦欢
+    with open(path,'wb') as f: 
+        f.write(r.content)
     f.close()
 
 #  json文件预处理
