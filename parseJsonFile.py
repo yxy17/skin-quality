@@ -1,32 +1,31 @@
 #coding=utf-8
 #!python3
 # parse the json file
-#
 
 import os
 import json
 import jsonlines
 import requests
-ROOT = '/data/libo/ydskin/'
+ROOT = '/data/libo/ydskin/'     # json文件的目录
 FILEPATH = ROOT + 'face_data_20200218.json'
 
-PICPATH = ROOT + 'imgs'
-LABELPATH = ROOT+'labels'
+PICPATH = ROOT + 'imgs'         # 下载的图像的目录
+LABELPATH = ROOT+'labels'       # 生成的label的目录
 
 import logging
 logging.basicConfig(filename = 'mylog.txt',level=logging.DEBUG, format=' %(asctime)s - %(levelname)s -   %(message)s') 
 logging.disable(logging.DEBUG) 
 
-
+# 通过记录中的url字段下载图像
 def downloadPicByUrl(url,path):
 
-    r = requests.request('get',url) #鑾峰彇缃戦〉
+    r = requests.request('get',url) # 
     #print(r.status_code)
     with open(path,'wb') as f:  #鎵撳紑鍐欏叆鍒皃ath璺緞閲?浜岃繘鍒舵枃浠讹紝杩斿洖鐨勫彞鏌勫悕涓篺
         f.write(r.content)  #寰€f閲屽啓鍏瀵硅薄鐨勪簩杩涘埗鏂囦欢
     f.close()
 
-
+#  json文件预处理
 def presub(filepath):
     f = open(filepath, 'r', encoding='utf-8')
     lines = f.read()
@@ -34,32 +33,36 @@ def presub(filepath):
     
     print(lines[-10:])
     
-    lines_json = lines.replace('jpg\"},{\"','jpg\"}\n{\"')
+    lines_json = lines.replace('jpg\"}{\"','jpg\"}\n{\"')   # 将原先无逗号分割的单行json数据替换为每行包含一条数据的新json文件方便处理
     
-    newpath = filepath[:-5]+'_new'+filepath[-5:]
+    newpath = filepath[:-5]+'_new'+filepath[-5:]            #  新json文件重命名
     logging.debug('filepath: %s'%newpath)
     
     n = open(newpath, 'w', encoding='utf-8')
     n.write(lines_json)
     n.close()
-    return newpath
-
-def stainEtc(report_id,value,rectangle,TXT): ## process Stain_detail black_head_detail pimple_detail
-    TXT.write('%d\t%d\n'%(report_id,value))
-    for i in range(value):
+    return newpath                                          #   返回新json文件的目录
+ 
+##  处理stain,black head和pimple
+def stainEtc(report_id,value,rectangle,TXT): 
+    TXT.write('%d\t%d\n'%(report_id,value))                 #   report_id为图像id,value为色斑（黑头、痘痘）个数
+    for i in range(value):                                  #   写入每个色斑（黑头、痘痘）的bounding box信息
         # logging.info('width\t%s\n'%type(rectangle[i]['width']))
         # logging.info('top\t%s\n'%type(rectangle[i]['top']))
         # logging.info('height\t%s\n'%type(rectangle[i]['height']))
         # logging.info('left\t%s\n'%type(rectangle[i]['left']))
         TXT.write('%f\t\t%f\t\t%f\t\t%f\n'%(rectangle[i]['width'],rectangle[i]['top'],rectangle[i]['height'],rectangle[i]['left']))
     TXT.write('\n')
-        
+
+##  处理skin color和skin type
 def skinColorType(report_id,skin_value,TXT):
     TXT.write('%d\t%s\n'%(report_id,skin_value))
 
+##  处理skin age
 def skinAge(report_id,skin_age,TXT):
     TXT.write('%d\t%d\n'%(report_id,skin_age))
-        
+
+##  处理rose_acne
 def roseAcne(report_id,rose_acne,TXT):
     ret = [0]*5
     for i in range(len(rose_acne)):
@@ -72,6 +75,7 @@ def roseAcne(report_id,rose_acne,TXT):
         TXT.write('%d '%ret[i])
     TXT.write('\n')
     
+##  处理coarse pore
 def coarsePore(report_id,coarse_pore,TXT):
     ret = [0]*4
     for i in range(len(coarse_pore)):
@@ -84,6 +88,7 @@ def coarsePore(report_id,coarse_pore,TXT):
         TXT.write('%d '%ret[i])
     TXT.write('\n')
 
+##  处理wrinkle
 def wrinkle(report_id,wrinkle_detail,TXT):
     ret_val = [0]*5
     ret = [[0,0],[0,0],[0,0],[0,0]]
@@ -107,6 +112,7 @@ def wrinkle(report_id,wrinkle_detail,TXT):
         TXT.write('\n')
     TXT.write('\n')
 
+##  处理black eye
 def blackEye(report_id,black_eye_detail,TXT):
     ret = [0,0]
     ret_val = [[0,0],[0,0]]
@@ -132,9 +138,9 @@ def blackEye(report_id,black_eye_detail,TXT):
 
 def processjson(filepath):
     with open(filepath, "r+", encoding="utf8") as f:
-        
         line = 0
         
+        ## 创建10个txt文件用于存储labels
         stainTXT = open(os.path.join(LABELPATH,'stain.txt'),'w',encoding="utf8")
         blackHeadTXT = open(os.path.join(LABELPATH,'black_head.txt'),'w',encoding="utf8")
         pimpleTXT = open(os.path.join(LABELPATH,'pimple.txt'),'w',encoding="utf8")
@@ -145,51 +151,42 @@ def processjson(filepath):
         coarsePoreTXT = open(os.path.join(LABELPATH,'coarse_pore.txt'),'w',encoding="utf8")
         wrinkleTXT = open(os.path.join(LABELPATH,'wrinkle.txt'),'w',encoding="utf8")
         blackEyeTXT = open(os.path.join(LABELPATH,'black_eye.txt'),'w',encoding="utf8")
-        
-        for item in jsonlines.Reader(f):
+            
+        for item in jsonlines.Reader(f):    #   逐行读取处理后的json文件，每一行包含了一张图像的所有标签信息
             
             ## test
             # print(item['report_id'])
             # continue
         
             ## fixed
-            photo_url = item['photo_url']
-            report_id = item['report_id'] 
+            photo_url = item['photo_url']   #   获取图像的url用于下载，
+            report_id = item['report_id']   #   获取图像的report_id,为int类型
             
             ## 
             ## log
             line = line + 1
             logging.info('%d\t%d'%(line,report_id))
             
-            print('%d\t%d'%(line,report_id))
-            
-            
-            ## same format
-            stain_detail = item['stain_detail']
+            print('%d\t%d'%(line,report_id))    #   输入处理的图像的序号的reort_id
+
+            ## 读取10个子任务的具体标签信息
+            stain_detail = item['stain_detail']             
             black_head_detail = item['black_head_detail']
             pimple_detail = item['pimple_detail']
-            
-            
-            ## same format
+
             skin_type = item['skin_type']
             skin_color = item['skin_color']
             skin_age = item['skin_age']
-            
-            
-            
-            ## 
+
             coarse_pore_detail = item['coarse_pore_detail']
             rose_acne_detail = item['rose_acne_detail']
-            
-            
-            
-            ## 
+
             wrinkle_detail = item['wrinkle_detail']
             black_eye_detail = item['black_eye_detail']
             
             
             
-            ##  download
+            ##  下载图像，后续只用于生成labelse时可注释掉，无需重复下载
             picpath = os.path.join(PICPATH,'%d.jpg'%report_id)
             logging.debug('photo_url: %s'%photo_url)
             logging.debug('report_id: %d'%report_id)
@@ -197,8 +194,8 @@ def processjson(filepath):
             downloadPicByUrl(photo_url,picpath)  # download pictures named by report_id
             
             ##  stain
-            stain_detail = json.loads(stain_detail)
-            if(not stain_detail):
+            stain_detail = json.loads(stain_detail)     ##  stain_detail原本为str格式，转化为字典
+            if(not stain_detail):                       ##  若为空字典，则色斑个数为0，bounding box为空列表
                 value = 0
                 rectangle = []
             else:
@@ -206,7 +203,7 @@ def processjson(filepath):
                 value = stain_detail['value']           ## type int
             stainEtc(report_id,value,rectangle,stainTXT)
             
-            ##  black_head
+            ##  black_head  与stain一致
             black_head_detail = json.loads(black_head_detail)
             if(not black_head_detail):
                 value = 0
@@ -216,7 +213,7 @@ def processjson(filepath):
                 value = black_head_detail['value']           ## type int
             stainEtc(report_id,value,rectangle,blackHeadTXT)
             
-            ## pimple
+            ## pimple       与stain一致
             pimple_detail = json.loads(pimple_detail)
             
             if(not pimple_detail):
