@@ -4,9 +4,9 @@ For environment setting, please refer to the above link.
 
 We use this code to obtain the cropped face image.
 
-''
+··
  python main.py --image_paths <original image directory> --save_paths <cropped imgs path>
-''
+··
 
 
 
