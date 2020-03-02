@@ -1,10 +1,13 @@
 # parseJsonFile.py
-
+  
+**需要安装jsonlines模块**  
+`conda install jsonlines`    
+  
 以下为此py文件中各函数的说明
 
 ## 1.label输出函数  
    
-  **处理每张图像的标签用于的函数如下，在以下函数内部可修改输出label的格式**  
+  **处理每张图像的标签用到的函数如下，在以下函数内部可修改输出label的格式**  
   
   ``` 
   stainEtc(report_id,value,rectangle,TXT)  
