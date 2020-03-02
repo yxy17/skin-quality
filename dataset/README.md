@@ -32,6 +32,7 @@ downloadPicByUrl(url,path)  ##用于下载图像，仅生成label时，可在pro
 presub(filepath)            ##用于对原始json文件预处理，可直接使用提供的新json文件，  
                             ##将主函数中的presub注释，并修改FILEPATH为新的json文件的目录
 ```
-
-  
+## 4.Usage  
+在py文件内部作所需的修改后直接运行  
+`python parseJsonFile.py`
 
