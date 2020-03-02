@@ -27,6 +27,8 @@ processjson(filepath)
 ```
 
 ## 3.json预处理及图像下载函数  
+
+**json预处理是把原本一行包含了所有数据的文件，改为了每行包含一张图像的所有信息的格式，生成了新的json文件**  
 ```  
 downloadPicByUrl(url,path)  ##用于下载图像，仅生成label时，可在processjson函数中将其注释
 presub(filepath)            ##用于对原始json文件预处理，可直接使用提供的新json文件，  
