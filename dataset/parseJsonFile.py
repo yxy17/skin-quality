@@ -7,7 +7,8 @@ import json
 import jsonlines
 import requests
 ROOT = '/data/libo/ydskin/'     # json文件的目录
-FILEPATH = ROOT + 'face_data_20200218.json'
+FILEPATH = ROOT + 'face_data_20200218.json' ## 可跳过json预处理，使用新的json文文件
+## FILEPATH = ROOT + 'face_data_20200218_new.json'      ##FILEPATH修改为此行，并修改主函数中的路径
 
 PICPATH = ROOT + 'imgs'         # 下载的图像的目录
 LABELPATH = ROOT+'labels'       # 生成的label的目录
