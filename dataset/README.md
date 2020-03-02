@@ -3,7 +3,7 @@
 **需要安装jsonlines模块**  
 `conda install jsonlines`    
   
-以下为此py文件中各函数的说明
+以下为此py文件中各函数的说明，参考代码中注释，以及脸部检测的word文档
 
 ## 1.label输出函数  
    
