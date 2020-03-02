@@ -6,7 +6,7 @@ import os
 import json
 import jsonlines
 import requests
-ROOT = '/data/libo/ydskin/'     # json文件的目录
+ROOT = '/data/yd_data/skin-quality/raw_data/'     # json文件的目录
 FILEPATH = ROOT + 'face_data_20200218.json' ## 可跳过json预处理，使用新的json文文件
 ## FILEPATH = ROOT + 'face_data_20200218_new.json'      ##FILEPATH修改为此行，并修改主函数中的路径
 
