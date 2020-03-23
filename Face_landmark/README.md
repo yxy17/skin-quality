@@ -25,8 +25,9 @@ By comparing height and width, we select such pictures and rotate for 90 degree 
 ~~Discussion needed on wheture save the pre-processed pictures or not~~
 
 ## Landmark results
-68 landmark points.
+![DEMO_RESULT](./imgs/171180.jpg)
 
+68 landmark points.
 |Part|Face Outline|Left Eyebrow| Right Eyebrow | Nose |Left Eye|Right Eye|Upper Lip|Lower Lip|
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|  
 |Index|0-16|17-21|22-26|27-35|36-41|42-47|48-54, 61-63|55-60, 64-67|
