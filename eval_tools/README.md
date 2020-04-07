@@ -21,4 +21,4 @@ For the former one, we counted the number of predicted objects. For the latter, 
 
 ## txt files
 `EvalResult.txt`: contains average miss rate and error rate of different groundtruth number, as well as average on all images and average on all images except zero groundtruth.  
-`CountOfPredictedNum_NoGT.txt`,`CountOfGroundtruthNum_NoPred.txt`: date of the above plot for special situation.
+`CountOfPredictedNum_NoGT.txt`,`CountOfGroundtruthNum_NoPred.txt`: data of the above plot for special situation.
