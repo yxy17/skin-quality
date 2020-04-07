@@ -53,7 +53,7 @@ In each txt file, each row is a landmark's coordinates `(x,y)`. In usual, there 
 **NOTE!**  
 However for those imgs that [Face-Alignment](https://github.com/1adrianb/face-alignment "1adrianb / face-alignment") fails to detect, only `NaN` is written in the txt file. Following codes may help to judge the situation.
 
-    if np.isnan(preds):
+    if preds.size==1:
         # detector fails to detect keypoints for this picture
         ...
     else:
