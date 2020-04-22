@@ -1,13 +1,13 @@
-# skin-quality
-
+# skin-quality    
+     
 There are 10 sub-tasks in skin quality.    
    
 #classification      
   (1)skin age : [1-10,11-20, 21-30, 31-40, 41-50, 51-60, 60+] (7 classes)    
   (2)skin color : [透白，白皙，自然，小麦，暗沉，黝黑] （7 classes）     
-  (3)skin quality: [油性，干性，中性，混合]      
-  
-#little object detections:
+  (3)skin quality: [油性，干性，中性，混合]       
+    
+#little object detections:      
   (4)痘痘：[0，1-10,11-20, 21-30, 31-40, 41-50, 51-60, 60+] (7 classes)    
   (5)黑头：[0，1-10,11-20, 21-30, 31-40, 41-50, 51-60, 60+] (7 classes)    
   (6)色斑：[0，1-10,11-20, 21-30, 31-40, 41-50, 51-60, 60+] (7 classes)    
