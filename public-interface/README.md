@@ -1,7 +1,7 @@
-# public interface
-
+# public interface    
+     
 Here public interface includes:   
--face detection
--face landmark
--face skin detection
--face roi crop
+-face detection   
+-face landmark   
+-face skin detection    
+-face roi crop    
