@@ -1,4 +1,4 @@
-# skin-quality    
+# Skin-quality    
      
 There are 10 sub-tasks in skin quality.    
    
@@ -31,3 +31,5 @@ There are 10 sub-tasks in skin quality.
     left face  |   right face  |  Nasal region(鼻周) |  forehead（前额）|  chin（下巴）    
         0/1              0/1             0/1                0/1            0/1    
  
+ The training method and validation method of the 10 subtasks are included in the files 'subtask'.   
+ The public interfaces are included in the files 'public-interfaces'.
