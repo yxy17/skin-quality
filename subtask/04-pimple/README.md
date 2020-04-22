@@ -1,1 +1,1 @@
-# skin-quality
+# pimple
