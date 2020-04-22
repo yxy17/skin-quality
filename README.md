@@ -30,5 +30,5 @@ There are 10 sub-tasks in skin quality.
   (10)Rosacea(玫瑰痤疮)：
     left face  |   right face  |  Nasal region(鼻周) |  forehead（前额）|  chin（下巴）
         0/1              0/1             0/1                0/1            0/1
-  
+ the 
     
