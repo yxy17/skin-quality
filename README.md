@@ -16,7 +16,7 @@ There are 10 sub-tasks in skin quality.
   (7)dark circles:     
                 色素型 血管型 阴影型         
     left eye     0/1   0/1   0/1    
-    right eye    0/1   0/1   0/1    
+    right eye    0/1   0/1   0/1      
        
   (8)Wrinkle：    
            鱼尾纹  眼纹  法令纹  抬头纹     
